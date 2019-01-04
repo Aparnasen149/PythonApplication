@@ -4,6 +4,7 @@ I have created a small application using python that will read a file from the c
 action as chosen by the user.
 
 For example:
+
 Count : It will give the count of lines and words in the file chosen.
 Maximum Word Count : It will display the word with maximum occurence.If there are more than one word with same maximum occurences, will
 display all of them.
