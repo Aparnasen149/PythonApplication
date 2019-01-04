@@ -12,7 +12,7 @@ display all of them.
 
 Top n common words : It will display all the top n common words.
 
-Minimum Word Count : It will display the word with minimum occurence.If there are more than one word with same maximum occurences, will
+Minimum Word Count : It will display the word with minimum occurence.If there are more than one word with same minimum occurences, will
 display all of them.
 
 Pallindromes in the File : It will display all the pallindromes present in the file.
