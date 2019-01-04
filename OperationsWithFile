@@ -1,0 +1,136 @@
+import glob
+
+list_of_files=dict()
+index=1
+for item in sorted(glob.glob('*.txt')):
+    list_of_files[index] = item
+    index += 1
+print("List of files :" )
+print(list_of_files)
+while True:
+    filenumber=int(input('Please enter the file number : '))
+    if filenumber not in list_of_files.keys():
+        print('Please Run again!!!')
+        break
+    for key,value in list_of_files.items():
+        if key == filenumber:
+            filename = value
+            print(value)
+    file=open(filename)
+    d=dict()
+    for lines in file:
+        words=lines.split()
+        for word in words:
+            d[word]=d.get(word,0)+1
+    
+    print('Choices For You :')
+    print('Count of lines and words : Option 1')
+    print('Maximum word count : Option 2')
+    print('Find Top n Common words : Option 3')
+    print('Minimum word count : Option 4')
+    print('Pallindromes in the File : Option 5')
+    print('Anagrams in the File : Option 6')
+    
+    def word_line_count():
+        file=open(filename)
+        line_count=0
+        word_count=0
+        for lines in file:
+            line=lines.rstrip()
+            if len(line) > 0:
+                line_count = line_count+1
+                for words in lines.split():
+                    word_count += 1
+                    
+        print('The no of lines in the file {} :'.format(line_count))
+        print('The no of words in the file {} :'.format(word_count))
+            
+    
+    def max_count():
+        maxd={}
+        maxvalue=-1
+        words=''
+        for k,v in d.items():
+            maxd.setdefault(v,[]).append(k)
+        for k,v in maxd.items():
+            if k > maxvalue:
+                maxvalue=k
+                words=v
+        print('The words {} have maximum occurence of {} times'.format(words,maxvalue))
+
+    def find_topn_common_words(n):
+        temp_list=[]
+        for k,v in d.items():
+            tup=(v,k)
+            temp_list.append(tup)
+        sorted_list = sorted(temp_list,reverse=True)
+        print('The top {} common words are :'.format(n)) 
+        print(sorted_list[:n])
+
+    def min_count():
+        maxd={}
+        minvalue=9999999999
+        words=''
+        for k,v in d.items():
+            maxd.setdefault(v,[]).append(k)
+        for k,v in maxd.items():
+            if k < minvalue:
+                minvalue=k
+                words=v
+        print('The words {} have minimum occurence of {} times'.format(words,minvalue))
+    
+    def pallindrome():
+        file=open(filename)
+        pal={}
+        for lines in file:
+            words=lines.split()
+            for word in words:
+                if word == word[::-1]:
+                    pal[word]=pal.get(word,0)+1
+       
+        print('The pallindromes and their count in the file are : ')
+        print(pal)
+    def anagram():
+        file=open(filename)
+        wordlist={}
+        result={}
+        for lines in file:
+            line=lines.split()
+            for word in line:
+                if word.endswith(','):
+                    word=word.split(',')[0]
+                elif word.endswith('?'):
+                    word=word.split('?')[0]
+                elif word.endswith('.'):
+                    word=word.split('.')[0]
+                elif word.endswith('’') :
+                    word=word.split('’')[0]
+                anagword=''.join(sorted(word))
+                wordlist[word]=anagword
+        
+        for k,v in wordlist.items():
+            result.setdefault(v,[]).append(k)
+            
+        for k,v in result.items():
+            if len(v)>1:
+                print(k,v)
+       
+    
+    choice = int(input("Please enter your Option: "))
+    if choice == 1:
+        word_line_count()
+    elif choice == 2:
+        max_count()
+    elif choice == 3:
+        n= int(input('Please Enter the number(top n) : '))
+        find_topn_common_words(n)
+    elif choice == 4:
+        min_count()
+    elif choice == 5:
+        pallindrome()
+    elif choice ==6:
+        anagram()
+        
+
+
+
